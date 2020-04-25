@@ -1,10 +1,11 @@
 <#
-Description: Script organizes files by file extensions in directories named after the file extension.
+Description: Script organizes files by file extensions in directories named after the file extension and displays some stats
+                about the new folders.
 Parameters:
     -Source: Accepts the path with the files that should be organized by file extensions.
     -Destination: Where the new directories named after the file extensions found in source directory should be created
                     and all files from source should be copied in the correct folders corresponding to file extension.
-Version: 1.0
+Version: 1.1
 #>
 
 # Accept two command line args for source and destination path.
@@ -79,4 +80,12 @@ foreach ($file in $files)
     # Copy files from source to the new destination folder named after the extension
     # to organize the files by extension.
     copy $file.fullname $ext_dest_dir
+}
+
+# Display the folder stats for the destination directories.
+$directories = dir $destination | Where-Object {$_.PSIsContainer}
+
+foreach ($directory in $directories)
+{
+    Display-FolderStats $directory.fullname
 }
