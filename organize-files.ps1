@@ -85,7 +85,10 @@ foreach ($file in $files)
 # Display the folder stats for the destination directories.
 $directories = dir $destination | Where-Object {$_.PSIsContainer}
 
+$directory_stats = @()
 foreach ($directory in $directories)
 {
-    Display-FolderStats $directory.fullname
+    $directory_stats += Display-FolderStats $directory.fullname
 }
+
+$directory_stats | sort count -Descending
