@@ -1,3 +1,12 @@
+<#
+Description: Script organizes files by file extensions in directories named after the file extension.
+Parameters:
+    -Source: Accepts the path with the files that should be organized by file extensions.
+    -Destination: Where the new directories named after the file extensions found in source directory should be created
+                    and all files from source should be copied in the correct folders corresponding to file extension.
+Version: 1.0
+#>
+
 # Accept two command line args for source and destination path.
 param([string]$source="C:\temp\source", [string]$destination="C:\temp\destination")
 
