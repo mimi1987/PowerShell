@@ -5,6 +5,8 @@
 #         -Subject <string>
 #         - Body <string>
 # Readme: You need to allow less secure apps in your gmail security settings for the script to work.
+#         The script gets the credentials through get-content in the specified path. Make sure to replace it with your own path and credential file.
+#         The file needs a username and password each one on its own line.
 
 function Send-Email {
 
