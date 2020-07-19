@@ -13,7 +13,8 @@ function Send-Email {
     param(
         [parameter(Mandatory)][String]$To,
         [Parameter(Mandatory)][String]$Subject,
-        [Parameter(Mandatory)][String]$Body
+        [Parameter(Mandatory)][String]$Body,
+        [String]$Attachment
     )
 
     # Get user credentials
@@ -21,17 +22,32 @@ function Send-Email {
     $Password = (get-content -Path D:\Dokumente\cred.txt)[1] | ConvertTo-SecureString -AsPlainText -Force
 
     # Params for Send-MailMessage
-    $Email = @{
-        SmtpServer = 'smtp.gmail.com'
-        UseSSL = $true
-        Verbose = $true
-        Credential = New-Object System.Management.Automation.PSCredential -ArgumentList $Username, $Password
-        From = $Username
-        To = $To
-        Subject = $Subject
-        Body = $Body
+    if ($Attachment) {
+        $Params1 = @{
+            SmtpServer = 'smtp.gmail.com'
+            UseSSL = $true
+            Verbose = $true
+            Credential = New-Object System.Management.Automation.PSCredential -ArgumentList $Username, $Password
+            From = $Username
+            To = $To
+            Subject = $Subject
+            Body = $Body
+            Attachment = $Attachment
+        }
+    
+        Send-MailMessage @Params1
     }
-
-    Send-MailMessage @Email
+    else {
+        $Params2 = @{
+            SmtpServer = 'smtp.gmail.com'
+            UseSSL = $true
+            Verbose = $true
+            Credential = New-Object System.Management.Automation.PSCredential -ArgumentList $Username, $Password
+            From = $Username
+            To = $To
+            Subject = $Subject
+            Body = $Body
+        }
+        Send-MailMessage @Params2
+    }
 }
-
