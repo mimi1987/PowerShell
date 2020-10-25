@@ -3,7 +3,7 @@
 # Version: 1.0
 
 # Funktion Passwortgenerator
-function New-Password ([int] $Anzahl) {
+function New-Password ([int]$Anzahl) {
     $Kennwort = ""
     $PasswortGenerator = New-Object System.Random
 
