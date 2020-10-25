@@ -3,7 +3,7 @@
 # Version: 1.0
 
 # Funktion Passwortgenerator
-function New-Password ([int]$Anzahl) {
+function New-Password ([int] $Anzahl, [switch]$Zwischenablage) {
     $Kennwort = ""
     $PasswortGenerator = New-Object System.Random
 
@@ -11,7 +11,9 @@ function New-Password ([int]$Anzahl) {
         $Kennwort = $Kennwort + [char]$PasswortGenerator.Next(33,127)
     }
     
-    $Kennwort | clip.exe
-
+    if ($zwischenablage) {
+        $Kennwort | clip.exe
+    }
+    
     return $Kennwort
 }
