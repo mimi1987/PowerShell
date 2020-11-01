@@ -1,4 +1,4 @@
-# Author: Michael Migshc
+# Author: Michael Migsch
 # Description: Gets all of the uninstalled updates of type software
 # Parameters: Just the Computername, which uses $env:computername as default value.
 
