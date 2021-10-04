@@ -1,24 +1,23 @@
-$Day = (Get-Date).DayOfYear
-$Year = (Get-Date).Year
+# MY POWERSHELL CONFIGURATION
 
-Write-Host "Hallo, $env:USERNAME!" -ForegroundColor White -BackgroundColor Blue
-Write-Host "Heute ist der $Day. Tag des Jahres $Year."
-# ...und viele weitere Definitionen
-
-# Sets the apperance of the console
-
-Set-PSReadLineOption -Colors @{
-  "Number" = "DarkMagenta"
-  "Parameter" = "Cyan"
-  "Variable" = "#FFA400"
-  "Keyword" = "DarkRed"
-}
+    # Sets the Syntax Colors
+    Set-PSReadLineOption -Colors @{
+    "Variable" = "DarkYellow"
+    "Keyword" = "DarkRed"
+    "Parameter" = "Cyan"
+    "Number" = "DarkMagenta"
+    }
 
 
-# Sets the prompt
+# MY FUNCTION DECLARATIONS
+    function Get-ScreenSize {
+        param(
+            [double]$ZollMin,
+            [double]$ZollMax
+        )
 
-function prompt
-{
-  "PS $(Get-Date -Format HH:mm)>"
-  $Host.UI.RawUI.WindowTitle = "$(Get-Location) +++ User: $env:USERNAME"
-}
+        $ZollMin = [math]::round($ZollMin * 2.54 / 100, 2)
+        $ZollMax = [math]::round($ZollMax * 2.54 / 100, 2)
+
+        ("{0}-{1}m" -f $ZollMin, $ZollMax) -replace ",", "." | Set-Clipboard
+    }
